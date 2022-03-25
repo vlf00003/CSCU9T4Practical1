@@ -17,22 +17,22 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author saemundur
  */
 public class CycleEntryTest {
-    
+
     public CycleEntryTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -132,7 +132,7 @@ public class CycleEntryTest {
         float result = instance.getDistance();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of getTerrain method, of class CycleEntry.
      */
@@ -141,7 +141,7 @@ public class CycleEntryTest {
         System.out.println("getTerrain");
         Entry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
         String expResult = "asphalt";
-        String result = instance.getTerrain();
+        String result = ((CycleEntry) instance).getTerrain();
         assertEquals(expResult, result);
     }
 
@@ -153,10 +153,10 @@ public class CycleEntryTest {
         System.out.println("getTempo");
         Entry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
         String expResult = "moderate";
-        String result = instance.getTempo();
+        String result = ((CycleEntry) instance).getTempo();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of getEntry method, of class CycleEntry.
      */
@@ -168,5 +168,5 @@ public class CycleEntryTest {
         String result = instance.getEntry();
         assertEquals(expResult, result);
     }
-    
+
 }

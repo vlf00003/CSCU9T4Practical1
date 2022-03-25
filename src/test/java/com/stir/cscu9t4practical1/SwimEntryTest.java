@@ -16,22 +16,22 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author saemundur
  */
 public class SwimEntryTest {
-    
+
     public SwimEntryTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -131,7 +131,7 @@ public class SwimEntryTest {
         float result = instance.getDistance();
         assertEquals(expResult, result, 0.0);
     }
-    
+
     /**
      * Test of getWhere method, of class SwimEntry
      */
@@ -140,13 +140,13 @@ public class SwimEntryTest {
         System.out.println("getWhere");
         Entry instanceA = new SwimEntry("Alice", 1, 2, 2003, 0, 16, 7, 3,"outdoors");
         String expResultA = "outdoors";
-        String result = instanceA.getWhere();
+        String result = ((SwimEntry) instanceA).getWhere();
         assertEquals(expResultA, result);
-        
+
         Entry instanceB = new SwimEntry("Alice", 1, 2, 2003, 0, 16, 7, 3,"pool");
-        String expResultB = "in a pool";
-        String result = instanceB.getWhere();
-        assertEquals(expResultB, result);
+        String expResultB = "pool";
+        String newResult = ((SwimEntry) instanceB).getWhere();
+        assertEquals(expResultB, newResult);
     }
     /**
      * Test of getEntry method, of class SwimEntry.
@@ -159,5 +159,5 @@ public class SwimEntryTest {
         String result = instance.getEntry();
         assertEquals(expResult, result);
     }
-    
+
 }

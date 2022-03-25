@@ -17,22 +17,22 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author saemundur
  */
 public class EntryTest {
-    
+
     public EntryTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -144,5 +144,5 @@ public class EntryTest {
         String result = instance.getEntry();
         assertEquals(expResult, result);
     }
-    
+
 }
