@@ -41,6 +41,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JButton cycle = new JButton("Cycle");
     private JButton sprint = new JButton("Sprint");
     private JButton swim = new JButton("Swim");
+    private JButton remove = new JButton("Remove");
 
     private TrainingRecord myAthletes = new TrainingRecord();
 
@@ -100,6 +101,8 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         sprint.addActionListener(this);
         add(swim);
         swim.addActionListener(this);
+        add(remove);
+        remove.addActionListener(this);
 
         add(addR);
         addR.addActionListener(this);
@@ -139,56 +142,74 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         if (event.getSource() == swim) {
             message = addEntry("swim");
         }
+        if (event.getSource() == remove) {
+            message = removeEntry();
+        }
         outputArea.setText(message);
         //blankDisplay();
     } // actionPerformed
 
     public String findAllByDate() {
-        int m = Integer.parseInt(month.getText());
-        int d = Integer.parseInt(day.getText());
-        int y = Integer.parseInt(year.getText());
-        outputArea.setText("looking up record ...");
-        String message = myAthletes.lookupEntries(d, m, y);
-        return message;
+        try {
+            int m = Integer.parseInt(month.getText());
+            int d = Integer.parseInt(day.getText());
+            int y = Integer.parseInt(year.getText());
+            outputArea.setText("looking up record ...");
+            String message = myAthletes.lookupEntries(d, m, y);
+            return message;
+        }
+        catch(NumberFormatException e){
+            return "Date fields must contain an integer";
+        }
     }
 
     public String addEntry(String what) {
-        String message = "Record added\n";
-        System.out.println("Adding "+what+" entry to the records");
-        String n = name.getText();
-        int m = Integer.parseInt(month.getText());
-        int d = Integer.parseInt(day.getText());
-        int y = Integer.parseInt(year.getText());
-        float km = java.lang.Float.parseFloat(dist.getText());
-        int h = Integer.parseInt(hours.getText());
-        int mm = Integer.parseInt(mins.getText());
-        int s = Integer.parseInt(secs.getText());
-        Entry e = new Entry(n, d, m, y, h, mm, s, km);
-        if(what == "cycle") {
-            String t = ter.getText();
-            String tem = temp.getText();
-            e = new CycleEntry(n, d, m, y, h, mm, s, km, t, tem);
+        try {
+            String message = "Record added\n";
+            System.out.println("Adding " + what + " entry to the records");
+            String n = name.getText();
+            int m = Integer.parseInt(month.getText());
+            int d = Integer.parseInt(day.getText());
+            int y = Integer.parseInt(year.getText());
+            float km = java.lang.Float.parseFloat(dist.getText());
+            int h = Integer.parseInt(hours.getText());
+            int mm = Integer.parseInt(mins.getText());
+            int s = Integer.parseInt(secs.getText());
+            Entry e = new Entry(n, d, m, y, h, mm, s, km);
+            if (what == "cycle") {
+                String t = ter.getText();
+                String tem = temp.getText();
+                e = new CycleEntry(n, d, m, y, h, mm, s, km, t, tem);
+            }
+            if (what == "sprint") {
+                int rep = Integer.parseInt(reps.getText());
+                int re = Integer.parseInt(rec.getText());
+                e = new SprintEntry(n, d, m, y, h, mm, s, km, rep, re);
+            }
+            if (what == "swim") {
+                String wh = where.getText();
+                e = new SwimEntry(n, d, m, y, h, mm, s, km, wh);
+            }
+            myAthletes.addEntry(e);
+            return message;
         }
-        if(what == "sprint") {
-            int rep = Integer.parseInt(reps.getText());
-            int re = Integer.parseInt(rec.getText());
-            e = new SprintEntry(n, d, m, y, h, mm, s, km, rep, re);
+        catch(NumberFormatException e){
+            return "All the fields except 'Name' must contain an integer";
         }
-        if(what == "swim") {
-            String wh = where.getText();
-            e = new SwimEntry(n, d, m, y, h, mm, s, km, wh);
-        }
-        myAthletes.addEntry(e);
-        return message;
     }
 
     public String lookupEntry() {
-        int m = Integer.parseInt(month.getText());
-        int d = Integer.parseInt(day.getText());
-        int y = Integer.parseInt(year.getText());
-        outputArea.setText("looking up record ...");
-        String message = myAthletes.lookupEntry(d, m, y);
-        return message;
+        try {
+            int m = Integer.parseInt(month.getText());
+            int d = Integer.parseInt(day.getText());
+            int y = Integer.parseInt(year.getText());
+            outputArea.setText("looking up record ...");
+            String message = myAthletes.lookupEntry(d, m, y);
+            return message;
+        }
+        catch(NumberFormatException e){
+            return "Date fields must contain an integer";
+        }
     }
 
     public void blankDisplay() {
@@ -212,6 +233,18 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         mins.setText(String.valueOf(ent.getMin()));
         secs.setText(String.valueOf(ent.getSec()));
         dist.setText(String.valueOf(ent.getDistance()));
+    }
+    public String removeEntry() {
+        try {
+            String n = name.getText();
+            int m = Integer.parseInt(month.getText());
+            int d = Integer.parseInt(day.getText());
+            int y = Integer.parseInt(year.getText());
+            return myAthletes.removeEntry(n, d, m, y);
+        }
+        catch(NumberFormatException e){
+            return "Date fields must contain an integer";
+        }
     }
 
 } // TrainingRecordGUI
