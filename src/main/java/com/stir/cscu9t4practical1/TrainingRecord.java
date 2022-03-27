@@ -17,12 +17,12 @@ public class TrainingRecord {
     // add a record to the list
     public void addEntry(Entry e){
         ListIterator<Entry> iter = tr.listIterator();
-        boolean present  = false;
+        boolean present  = false; //present is initially false
         while (iter.hasNext()) {
-            Entry current = iter.next();
+            Entry current = iter.next(); //iterate over all records
             if (current.getName().equals(e.getName()) && current.getDay() == e.getDay() && current.getMonth() == e.getMonth()
                     && current.getYear() == e.getYear()) {
-                present = true;
+                present = true; //set present to true if another activity with the same name was found on the same day
             }
         }
         if (present == true){
@@ -72,6 +72,7 @@ public class TrainingRecord {
         boolean removed  = false;
         while (iter.hasNext()) {
             Entry current = iter.next();
+            //remove the record and set removed to true if the record has been found
             if (current.getDay() == d && current.getMonth() == m
                     && current.getYear() == y && current.getName().equals(n)) {
                 iter.remove();

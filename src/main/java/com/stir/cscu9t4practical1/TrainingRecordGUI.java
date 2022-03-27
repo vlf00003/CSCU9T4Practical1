@@ -22,11 +22,11 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JTextField reps = new JTextField(5);
     private JTextField rec = new JTextField(5);
     private JTextField where = new JTextField(5);
-    private JLabel labter = new JLabel(" Cycle - Terrain:");
-    private JLabel labtemp = new JLabel(" Cycle - Tempo:");
-    private JLabel labreps = new JLabel(" Sprint - Repetitions:");
-    private JLabel labrec = new JLabel(" Sprint - Recovery (min):");
-    private JLabel labwhere = new JLabel(" Swim - Where:");
+    private JLabel labter = new JLabel(" Cycle - Terrain:"); //cycle terrain
+    private JLabel labtemp = new JLabel(" Cycle - Tempo:"); //cycle tempo
+    private JLabel labreps = new JLabel(" Sprint - Repetitions:"); //sprint reps
+    private JLabel labrec = new JLabel(" Sprint - Recovery (min):"); //sprint recovery in minutes
+    private JLabel labwhere = new JLabel(" Swim - Where:"); //swimming location (indoors or outdoors)
     private JLabel labn = new JLabel(" Name:");
     private JLabel labd = new JLabel(" Day:");
     private JLabel labm = new JLabel(" Month:");
@@ -38,9 +38,9 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JButton addR = new JButton("Add");
     private JButton lookUpByDate = new JButton("Look Up");
     private JButton findAllByDate = new JButton("Find All By Date");
-    private JButton cycle = new JButton("Cycle");
-    private JButton sprint = new JButton("Sprint");
-    private JButton swim = new JButton("Swim");
+    private JButton cycle = new JButton("Cycle"); // add cycle record
+    private JButton sprint = new JButton("Sprint"); //add sprint record
+    private JButton swim = new JButton("Swim"); //add swim record
     private JButton remove = new JButton("Remove");
 
     private TrainingRecord myAthletes = new TrainingRecord();
@@ -80,6 +80,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         add(dist);
         dist.setEditable(true);
 
+        //new added items
         add(labter);
         add(ter);
         ter.setEditable(true);
@@ -159,7 +160,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             return message;
         }
         catch(NumberFormatException e){
-            return "Date fields must contain an integer";
+            return "Date fields, except name, must contain numbers";
         }
     }
 
@@ -194,7 +195,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             return message;
         }
         catch(NumberFormatException e){
-            return "All the fields except 'Name' must contain an integer";
+            return "Date fields, except name, must contain numbers";
         }
     }
 
@@ -208,7 +209,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             return message;
         }
         catch(NumberFormatException e){
-            return "Date fields must contain an integer";
+            return "Date fields, except name, must contain numbers";
         }
     }
 
@@ -243,7 +244,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             return myAthletes.removeEntry(n, d, m, y);
         }
         catch(NumberFormatException e){
-            return "Date fields must contain an integer";
+            return "Date fields, except name, must contain numbers";
         }
     }
 
